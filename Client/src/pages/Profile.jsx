@@ -3,7 +3,7 @@
 
 // function Profile() {
 //   const [profile, setProfile] = useState({
-//     fullname: '',
+//     username: '',
 //     email: '',
 //     profileImage: '',
 //   });
@@ -220,7 +220,7 @@
 //           type="file"
 //           id="image"
 //           accept="image/*"
-//           onChange={onImageChange}  
+//           onChange={onImageChange}
 //         />
 //       </div>
 //       <button onClick={handleSave} className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md mr-2">
@@ -233,20 +233,19 @@
 
 // export default Profile;
 
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 // import Wishlist from "../Component/Wishlist";
 
-
+axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+  "Token"
+)}`;
 
 const getCookie = (name) => {
-  let cookieArray = document.cookie.split('; ');
+  let cookieArray = document.cookie.split("; ");
   for (let cookie of cookieArray) {
-    let [cookieName, cookieValue] = cookie.split('=');
+    let [cookieName, cookieValue] = cookie.split("=");
     if (cookieName === name) {
       return cookieValue;
     }
@@ -258,16 +257,16 @@ const Profile = () => {
   const [authToken, setAuthToken] = useState(null);
 
   const [userData, setUserData] = useState({
-    id: "", // Replace with the actual user ID
+    id: Cookies.get("id"), // Replace with the actual user ID
     username: "",
     email: "",
     phone_number: "",
-    password: "",
+    newPassword: "",
     avatar: "",
- // Add wishlist property to the initial state
+    // Add wishlist property to the initial state
   });
-  const [wishlist , setWishlist] =useState([])
-  console.log(wishlist)
+  const [wishlist, setWishlist] = useState([]);
+  console.log(wishlist);
 
   const [photoPreview, setPhotoPreview] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -284,15 +283,10 @@ const Profile = () => {
   useEffect(() => {
     const Token = getCookie("accessToken");
     setAuthToken(Token);
-    
+
     const id = Cookies.get("id"); // Replace with the actual user ID
     axios
-      .get('http://127.0.0.1:3001/userInfo',{
-        headers: {
-          Authorization: ` ${authToken}`,
-          // Add other headers if needed
-        },
-      })
+      .get("http://localhost:5002/profile")
       .then((response) => {
         console.log("User Data:", response.data);
         setUserData(response.data);
@@ -302,35 +296,10 @@ const Profile = () => {
         console.error("Error fetching user data from the server:", error);
       });
 
-
-      
-//http://127.0.0.1:3001/wishlist
-    // Fetch wishlist data from JSON file
-  //  try{
-  //   const response =  axios.get("http://127.0.0.1:3001/wishlist",{
-  //   headers: {
-  //     Authorization: ` ${authToken}`,
-  //   }
-  //   }) 
-  //   console.log("wishlist",response)
-  // //     setWishlist(response.data)
-
-  // }catch(error){
-  //   console.log(error)
-  // }
-
+    
   }, [authToken]);
 
-  // .then((response) => {
-  //   console.log("Wishlist Data:", response.data);
-  //   setUserData((prevUserData) => ({
-  //     ...prevUserData,
-  //     wishlist: response.data.wishlist,
-  //   }));
-  // })
-  // .catch((error) => {
-  //   console.error("Error fetching wishlist data from the server:", error);
-  // });
+ 
 
   const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
@@ -338,60 +307,53 @@ const Profile = () => {
     if (!file) {
       return;
     }
-     let formData = new FormData()
-     formData.append("image", file)
+    let formData = new FormData();
+    formData.append("image", file);
 
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = async () => {
-    //   const base64Image = reader.result;
+   
 
-      try {
-        // Update the user data on the JSON server
-        const response = await axios.put(
-          'http://127.0.0.1:3001/updateuserimage',
-          formData,
-          {
-            headers: {
-              Authorization: ` ${authToken}`
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          setUserData(response.data);
-          let photoUrl = URL.createObjectURL(file)
-          setPhotoPreview(photoUrl);
-        } else {
-          console.error("Failed to update avatar.");
+    try {
+      // Update the user data on the JSON server
+      const response = await axios.put(
+        "http://127.0.0.1:3001/updateuserimage",
+        formData,
+        {
+          headers: {
+            Authorization: ` ${authToken}`,
+          },
         }
-      } catch (error) {
-        console.error("Error updating avatar:", error);
+      );
+
+      if (response.status === 200) {
+        setUserData(response.data);
+        let photoUrl = URL.createObjectURL(file);
+        setPhotoPreview(photoUrl);
+      } else {
+        console.error("Failed to update avatar.");
       }
-    // };
-  }
+    } catch (error) {
+      console.error("Error updating avatar:", error);
+    }
+   
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const id = Cookies.get("id"); // Replace with the actual user ID
-console.log(userData.password);
       const response = await axios.put(
-        'http://127.0.0.1:3001/edituser',userData,{
-          headers: {
-            Authorization: ` ${authToken}`
-            // Add other headers if needed
-          },
-        },);
-
+        "http://localhost:5002/editProfile",
+        userData
+      );
+  
       if (response.status === 200) {
-        alert("User data updated successfully!");
+        // Display a success alert
+        window.alert('User data updated successfully!');
       } else {
-        alert("Failed to update user data.");
+        console.error("Failed to update user data.");
       }
     } catch (error) {
-      alert("Error updating user data:", error);
+      console.error("Error updating user data:", error);
+      alert("Error updating user data:", error.message);
     }
   };
 
@@ -414,19 +376,21 @@ console.log(userData.password);
           </div>
           <button
             onClick={handleSelectPhoto}
-            class="bn632-hover bn28" id="button"          >
+            class="bn632-hover bn28"
+            id="button"
+          >
             Change Photo
           </button>
         </div>
         <form
           onSubmit={handleFormSubmit}
-          className="mt-4 text-center p-4 md:mt-0"
+          className="max-w-2xl m-4 p-10 bg-[#6c6e8e] rounded shadow-2xl border-4 border-[#686892]"
         >
           <div className="grid grid-cols-1 gap-4">
             <div>
               <label
                 htmlFor="nameInput"
-                className="block text-sm font-medium text-gray-500"
+                className="block text-sm font-medium text-white"
               >
                 Name
               </label>
@@ -445,7 +409,7 @@ console.log(userData.password);
             <div>
               <label
                 htmlFor="emailInput"
-                className="block mt-2 text-sm font-medium text-gray-500"
+                className="block mt-2 text-sm font-medium text-white"
               >
                 Email
               </label>
@@ -461,32 +425,11 @@ console.log(userData.password);
                 />
               </div>
             </div>
-            <div>
-              <label
-                htmlFor="phoneInput"
-                className="block mt-2 text-sm font-medium text-gray-500"
-              >
-                Phone Number
-              </label>
-              <div className="relative">
-                <input
-                  type="tel"
-                  id="phoneInput"
-                  value={userData.phone_number}
-                  onChange={(e) =>
-                    setUserData({
-                      ...userData,
-                      phone_number: e.target.value,
-                    })
-                  }
-                  className="mt-1 p-2 border rounded-md w-full max-w-md"
-                />
-              </div>
-            </div>
+           
             <div>
               <label
                 htmlFor="passwordInput"
-                className="block mt-2 text-sm font-medium text-gray-500"
+                className="block mt-2 text-sm font-medium text-white"
               >
                 Password
               </label>
@@ -494,18 +437,16 @@ console.log(userData.password);
                 <input
                   type="password"
                   id="passwordInput"
-                  value={userData.password}
+                  value={userData.newPassword}
                   onChange={(e) =>
-                    setUserData({ ...userData, password: e.target.value })
+                    setUserData({ ...userData, newPassword: e.target.value })
                   }
                   className="mt-1 p-2 border rounded-md w-full max-w-md"
                 />
               </div>
             </div>
           </div>
-          <button
-            type="submit"
-            class="bn632-hover bn28" id="button"          >
+          <button type="submit" class=" px-4 py-3 mt-4 font-semibold text-white bg-[#b31212dd] rounded-lg hover:text-blue-600" id="button">
             Save Changes
           </button>
         </form>
@@ -516,12 +457,13 @@ console.log(userData.password);
         {userData.wishlist && userData.wishlist.length > 0 ? (
           <ul className="list-disc list-inside">
             {userData.wishlist.map((item, index) => (
-              <li key={index}>{item.item} - ${item.price}</li>
+              <li key={index}>
+                {item.item} - ${item.price}
+              </li>
             ))}
           </ul>
         ) : (
           <p></p>
-
         )}
         {/* <Wishlist/> */}
       </div>
