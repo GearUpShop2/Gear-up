@@ -552,12 +552,34 @@ exports.removeProductFromFavorites = async (req, res) => {
 
 exports.getTopSellingProducts = async (req, res) => {
   try {
-    const topSellingProducts = await Product.find({ isTopSelling: true });
+    const topSellingProducts = await Product.aggregate([
+      {
+        $match: { isTopSelling: true, isDeleted: false } 
+      },
+      {
+        $lookup: {
+          from: 'images', 
+          localField: '_id',
+          foreignField: 'productId',
+          as: 'image'
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          title: 1,
+          rating: 1,
+          price: 1,
+          category: 1,
+          'image.imageUrl': 1
+        }
+      }
+    ]);
 
-    res.json(topSellingProducts);
+    res.status(200).json(topSellingProducts);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 exports.getEightProducts = async (req, res) => {
