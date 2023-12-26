@@ -25,5 +25,6 @@ router.delete('/delete/:productId', productController.softDeleteProduct);
 router.delete('/product/:productId',authorization.authorize ,productController.removeProductFromFavorites);
 router.get('/topselling', productController.getTopSellingProducts);
 router.get('/home', productController.getEightProducts);
+router.delete('/raf',authorization.authorize,productController.deleteAllCartProductsForUser);
 
 module.exports = router;

@@ -618,7 +618,18 @@ exports.getEightProducts = async (req, res) => {
   }
 };
 
+exports.deleteAllCartProductsForUser = async (req, res) => {
+  try {
+    const userId = req.user._id; 
 
+    await Cart.deleteMany({ userId: userId });
+
+    res.json({ message: 'All cart products deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
 

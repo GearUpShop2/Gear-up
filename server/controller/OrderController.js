@@ -6,9 +6,8 @@ const Cart =require('../model/Cart Model')
 exports.createOrder = async (req, res) => {
   try {
     const userId = req.user._id;
-    const { name, email, street, city, country, zip, total } = req.body;
+    const { name, email, street, city, country, zip, total, itemId } = req.body;
 
-    // Create a new order
     const newOrder = new Order({
       user: userId,
       name,
@@ -22,7 +21,7 @@ exports.createOrder = async (req, res) => {
 
     const savedOrder = await newOrder.save();
 
-    await Cart.deleteMany({ user: userId });
+    await Cart.deleteMany({ userId: userId });
 
     res.json(savedOrder);
   } catch (error) {
