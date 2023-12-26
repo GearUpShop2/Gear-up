@@ -562,12 +562,37 @@ exports.getTopSellingProducts = async (req, res) => {
 };
 exports.getEightProducts = async (req, res) => {
   try {
-    const eightProducts = await Product.find().limit(8);
+    const productsWithImage = await Product.aggregate([
+      {
+        $match: { isDeleted: false } 
+      },
+      {
+        $lookup: {
+          from: 'images', 
+          localField: '_id',
+          foreignField: 'productId',
+          as: 'image'
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          title: 1,
+          rating: 1,
+          price: 1,
+          category: 1,
+          'image.imageUrl': 1
+        }
+      },
+      {
+        $limit: 8 
+      }
+    ]);
 
-    res.json(eightProducts);
+    res.status(200).json(productsWithImage);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 

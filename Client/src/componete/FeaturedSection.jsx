@@ -371,7 +371,7 @@ function FeaturedSection() {
 
   useEffect(() => {
     // Make a GET request to the API endpoint that provides gallery data
-    axios.get('http://localhost:5002/getProductsWithImage')
+    axios.get('http://localhost:5002/FeturedProduct')
       .then(response => setGalleryData(response.data))
       .catch(error => console.error('Error fetching gallery data:', error));
   }, []); // The empty dependency array ensures that this effect runs once when the component mounts
