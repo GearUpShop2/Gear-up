@@ -536,7 +536,7 @@ exports.removeProductFromFavorites = async (req, res) => {
   try {
       const  userId = req.user._id;
       const productId = req.params.productId; 
- 
+ console.log(productId);
     const cartItem = await Wishlist.findOneAndDelete({ userId, 'productId': productId });
 
     if (!cartItem) {

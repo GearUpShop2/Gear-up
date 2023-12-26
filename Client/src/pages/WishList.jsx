@@ -3,30 +3,29 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
-  "Token"
-)}`;
+axios.defaults.headers.common["Authorization"] = `${localStorage.getItem("Token")}`;
 
 function WishList() {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
 
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("http://localhost:5002/wish");
+      console.log("Fetched product:", response.data);
+      setProduct(response.data);
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get("http://localhost:5002/wish");
-        console.log("Fetched product:", response.data);
-        setProduct(response.data);
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      }
-    };
-
     fetchProduct();
-  }, [productId]);
+  }, []);
+  
+  const addToCart = () => {
 
-  const addToCart = (productId) => {
-    console.log(productId);
+    // Make a POST request to your shopping cart endpoint
     axios
       .post(`http://localhost:5002/add-to-cart/${productId}`)
       .then((response) => {
@@ -34,30 +33,27 @@ function WishList() {
           title: "Shopping Cart",
           text: "Product added to Shopping Cart",
           icon: "success",
-          position: "top-end",
-          showConfirmButton: false,
+          position: "top-end", // Try different positions
+          showConfirmButton: false, // Hide the confirmation button
           timer: 2000,
         });
         console.log("Product added to cart:", response.data);
+        
       })
       .catch((error) => {
         console.error("Error adding product to cart: ", error);
-        console.log(productId);
       });
   };
 
-  const removeFromWishList = (productId) => {
-    axios
-      .delete(`http://localhost:5002/product/${productId}`)
-      .then((response) => {
-        console.log("Product removed from wishlist:", response.data);
-        setProduct((prevProducts) =>
-          prevProducts.filter((item) => item.id !== productId)
-        );
-      })
-      .catch((error) => {
-        console.error("Error removing product from wishlist: ", error);
-      });
+  const removeFromWishList = async (productId) => {
+    try {
+      await axios.put(`http://localhost:5002/product/${productId}`);
+     
+      // Fetch the updated wishlist after removing the item
+      await fetchProduct();
+    } catch (error) {
+      console.error("Error removing product from wishlist: ", error);
+    }
   };
 
   if (!product) {
@@ -97,12 +93,10 @@ function WishList() {
                 <p className="mb-1">{product.description}</p>
                 <h2 className="font-semibold mb-1">${product.price}</h2>
                 <div className="flex flex-row justify-start items-end">
-                  <button
-                    className="p-2 px-6 text-white rounded-md text-start"
-                  >
+                  <button className="p-2 px-6 text-white rounded-md text-start">
                     <Link
                       className="relative text-white hover:text-[#B31312]"
-                      onClick={() => addToCart(product.id)}
+                      onClick={() => addToCart(product.productId)}
                     >
                       <svg
                         className="h-7 w-6"
