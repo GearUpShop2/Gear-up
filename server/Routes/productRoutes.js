@@ -24,6 +24,11 @@ router.post('/add', productController.addNewProduct);
 router.delete('/delete/:productId', productController.softDeleteProduct);
 router.put('/product/:productId',authorization.authorize ,productController.removeProductFromFavorites);
 router.get('/topselling', productController.getTopSellingProducts);
+
 router.get('/FeturedProduct', productController.getEightProducts);
+
+router.get('/home', productController.getEightProducts);
+router.delete('/raf',authorization.authorize,productController.deleteAllCartProductsForUser);
+ 
 
 module.exports = router;

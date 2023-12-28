@@ -27,7 +27,7 @@ function FeaturedProducts() {
           <a className="absolute inset-0 flex items-end" href="#">
             <div className="pb-12 pl-12">
               <h2 className="mb-2 text-3xl font-bold text-white ">
-                Digital Camera
+                Leed Light
               </h2>
               <p className="text-xl font-bold text-white ">
                 <span>$100.00</span>

@@ -90,11 +90,10 @@ function Footer() {
             href="#"
             className="inline-block mb-4 text-2xl font-bold text-white"
           >
-            Logo
+            GEAR UP SHOP
           </a>
           <p className="text-base font-normal leading-6 lg:w-64 text-white">
-            Lorem ipsum dor amet Lorem ipsum dor amet Lorem ipsum dor Lorem
-            ipsum dor amet Lorem ipsum dor amet Lorem ipsum dor
+          Explore various car accessories on our e-commerce website to get the best products for your car
           </p>
         </div>
         <div className="w-full px-4 md:w-1/4 lg:w-2/12 mb-11 lg:mb-0">
@@ -129,7 +128,10 @@ function Footer() {
           </ul>
         </div>
         <div className="w-full px-4 mb-11 lg:mb-0 md:w-1/4 lg:w-2/12">
-          <h2 className="mb-4 text-base font-bold text-white text-white">
+         
+        </div>
+        <div className="w-full px-4 mb-2 lg:mb-0 md:w-1/3 lg:w-4/12">
+        <h2 className="mb-4 text-base font-bold text-white text-white">
             Recent Posts
           </h2>
           <ul>
@@ -158,28 +160,7 @@ function Footer() {
               </a>
             </li>
           </ul>
-        </div>
-        <div className="w-full px-4 mb-2 lg:mb-0 md:w-1/3 lg:w-4/12">
-          <h2 className="mb-4 text-lg font-bold text-white text-white">
-            Newsletter
-          </h2>
-          <div className="flex flex-wrap">
-            <div className="w-full py-1 mb-2 lg:flex-1 lg:py-0 lg:mr-3 lg:mb-0">
-              <input
-                type="email "
-                className="inline-block w-full h-12 px-3 text-white placeholder-white border rounded-md dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-700 dark:bg-gray-700"
-                placeholder="Your email"
-              />
-            </div>
-            <div className="w-full py-1 lg:w-auto lg:py-0">
-              <a
-                href="#"
-                className="inline-block w-full px-5 py-4 font-medium leading-4 text-center bg-blue-200 rounded-md dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-blue-300"
-              >
-                Subscribe
-              </a>
-            </div>
-          </div>
+       
         </div>
       </div>
     </div>

@@ -83,13 +83,7 @@ function UsersTable() {
                     />
                   </td>
                   <td className="p-3 px-5 flex justify-end">
-                    <button
-                      type="button"
-                      onClick={() => handleSave(users.id)}
-                      className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                    >
-                      Save
-                    </button>
+                  
                     <button
                       type="button"
                       onClick={() => handleDelete(users._id)}

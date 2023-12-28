@@ -244,7 +244,7 @@ function SignUp() {
 
       
 
-<section className="font-poppins h-screen flex  ">
+<section className="font-poppins h-screen flex bg-gray-100 ">
   <div className="max-w-6xl px-1 mx-auto lg:px-6  ">
     <div className="flex flex-col items-center h-full justify-center md:flex-row">
       <div className="flex flex-wrap items-center  bg-[#6c6e8e] shadow-lg dark:bg-gray-900 my-7 ">
@@ -258,11 +258,11 @@ function SignUp() {
           <div className="absolute left-0 z-10 top-10 lg:top-40">
             <div className="p-14">
               <h2 className="text-4xl font-bold text-gray-300 lg:text-5xl ">
-                <span className="text-yellow-300">Hello! </span>welcome to our
-                community
+                <span className="text-yellow-300">Hello! </span>welcome to 
+               GEAR UP SHOP
               </h2>
               <p className="text-lg font-medium text-gray-300 py-7">
-                Make your dream comes true and achieve your success
+              We wish you an enjoyable shopping experience
               </p>
 
               <Link to = '/login'>

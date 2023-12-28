@@ -43,18 +43,21 @@ function Login({setIsLoggedIn}) {
 
   return (
     <div>
-      <section className="relative py-4 lg:py-11 font-poppins h-screen flex bg-stone-200">
+      <section className="relative py-4 lg:py-11 font-poppins h-screen flex bg-gray-100">
         <div className="max-w-6xl px-1 mx-auto lg:px-6 flex ">
           <div className="flex flex-wrap items-center ">
             <div className="w-full lg:w-2/5">
               <div className="bg-[#6c6e8e] shadow-lg dark:bg-gray-900 p-11 ">
                 <form action="" className="">
                   <div className="text-center mb-7">
-                    <span className="inline-block mb-3 font-semibold text-base text-white">
+                    {/* <span className="inline-block mb-3 font-semibold text-base text-white">
                       Login
-                    </span>
+                    </span> */}
+                     <h2 className="text-3xl font-bold text-white dark:text-white">
+                      Login
+                    </h2>
                     <h2 className="text-3xl font-bold text-white dark:text-white">
-                      Join our community
+                      GEAR UP SHOP
                     </h2>
                   </div>
                   <div className="relative flex flex-wrap mb-5">
@@ -140,11 +143,9 @@ function Login({setIsLoggedIn}) {
                 Welcome to our store
                 </span>
                 <h2 className="mt-3 mb-6 text-4xl font-bold text-gray-800 dark:text-gray-400">
-                  Join our community with your login credentials
+                Explore various car accessories on our  website  to get the best products for your car
                 </h2>
-                <p className="text-lg text-gray-500 dark:text-blue-400">
-                  Lorem ipsum dor amet set amirospis{' '}
-                </p>
+                
               </div>
             </div>
             

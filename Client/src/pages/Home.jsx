@@ -4,6 +4,7 @@ import Categories from '../componete/Categories'
 import FeaturedProducts from '../componete/FeaturedProducts'
 
 import FeaturedSection from '../componete/FeaturedSection'
+import TopRated from '../componete/TopRated'
 
 
 
@@ -12,9 +13,10 @@ function Home() {
     <div >
     <Herosection/>
      <Categories/>
-    
+     <TopRated/>
     <FeaturedProducts/> 
     <FeaturedSection/>
+    
     
 
     

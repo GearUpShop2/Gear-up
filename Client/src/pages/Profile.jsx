@@ -376,7 +376,7 @@ const Profile = () => {
           </div>
           <button
             onClick={handleSelectPhoto}
-            class="bn632-hover bn28"
+            class="px-4 py-3 mt-4 font-semibold text-white bg-[#b31212dd] rounded-lg hover:text-blue-600"
             id="button"
           >
             Change Photo
@@ -386,6 +386,11 @@ const Profile = () => {
           onSubmit={handleFormSubmit}
           className="max-w-2xl m-4 p-10 bg-[#6c6e8e] rounded shadow-2xl border-4 border-[#686892]"
         >
+           <div>
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-teal-700 text-5xl font-black">
+          User information
+        </h1>
+          </div>
           <div className="grid grid-cols-1 gap-4">
             <div>
               <label

@@ -58,8 +58,8 @@ function AddProduct() {
   return (
     <div>
       
-        <div className=" flex justify-center ">
-        <form className="  m-4 p-10 bg-[#6c6e8e] rounded shadow-3xl border-4 border-[#686892]" onSubmit={handleSubmit} >
+        <div className=" flex justify-center max-w-[500px]  mx-auto">
+        <form className="  m-4 p-10 bg-[#6c6e8e] rounded shadow-3xl border-4 border-[#686892] w-full" onSubmit={handleSubmit} >
           <div>
           <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-5xl font-black">
           Add Product

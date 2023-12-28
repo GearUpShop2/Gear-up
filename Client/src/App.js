@@ -24,6 +24,7 @@ import Dashbord from './pages/Dashboard/Dashbord';
 import { AuthProvider } from './componete/AuthContext'; // استيراد AuthProvider
 import WishList from './pages/WishList';
 import AdminLogin from './pages/AdminLogin';
+import NotFound from './pages/NotFound';
 
 function App() {
   const role = sessionStorage.getItem('role');
@@ -61,6 +62,7 @@ function App() {
           <Route path='/accessories' element={<Accessories />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/wishlist' element={<WishList />} />
+          <Route path='/notfound' element={<NotFound />} />
           <Route path='/adminLogin' element={<AdminLogin setIsLoggedIn={setIsLoggedIn}/>} />
          
 

@@ -22,9 +22,8 @@ function WishList() {
   useEffect(() => {
     fetchProduct();
   }, []);
-  
-  const addToCart = () => {
 
+  const addToCart = () => {
     // Make a POST request to your shopping cart endpoint
     axios
       .post(`http://localhost:5002/add-to-cart/${productId}`)
@@ -33,12 +32,11 @@ function WishList() {
           title: "Shopping Cart",
           text: "Product added to Shopping Cart",
           icon: "success",
-          position: "top-end", // Try different positions
-          showConfirmButton: false, // Hide the confirmation button
+          position: "top-end",
+          showConfirmButton: false,
           timer: 2000,
         });
         console.log("Product added to cart:", response.data);
-        
       })
       .catch((error) => {
         console.error("Error adding product to cart: ", error);
@@ -46,14 +44,30 @@ function WishList() {
   };
 
   const removeFromWishList = async (productId) => {
-    try {
-      await axios.put(`http://localhost:5002/product/${productId}`);
-     
-      // Fetch the updated wishlist after removing the item
-      await fetchProduct();
-    } catch (error) {
-      console.error("Error removing product from wishlist: ", error);
-    }
+    // Show SweetAlert confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, make the removal request
+        axios
+          .put(`http://localhost:5002/product/${productId}`)
+          .then(() => {
+            Swal.fire("Removed!", "Your item has been removed.", "success");
+            // Fetch the updated wishlist after removing the item
+            fetchProduct();
+          })
+          .catch((error) => {
+            console.error("Error removing product from wishlist: ", error);
+          });
+      }
+    });
   };
 
   if (!product) {
@@ -133,3 +147,4 @@ function WishList() {
 }
 
 export default WishList;
+

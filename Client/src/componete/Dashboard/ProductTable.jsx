@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 function ProductTable() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; // Set the number of items per page
+  const itemsPerPage = 6; // Set the number of items per page
 
   useEffect(() => {
     fetchData();
@@ -111,13 +111,7 @@ function ProductTable() {
                       />
                     </td>
                     <td className="p-3 px-5 flex justify-end">
-                      <button
-                        type="button"
-                        onClick={() => handleSave(product._id)}
-                        className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      >
-                        Save
-                      </button>
+                   
                       <button
                         type="button"
                         onClick={() => handleDelete(product._id)}

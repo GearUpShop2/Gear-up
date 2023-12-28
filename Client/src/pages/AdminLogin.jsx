@@ -53,7 +53,7 @@ function AdminLogin({ setIsLoggedIn }) {
                       Login
                     </span>
                     <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-300">
-                      Join our community
+                      GEAR UP SHOP
                     </h2>
                   </div>
                   <div className="relative flex flex-wrap mb-5">
@@ -141,9 +141,7 @@ function AdminLogin({ setIsLoggedIn }) {
                 <h2 className="mt-3 mb-6 text-4xl font-bold text-gray-800 dark:text-gray-400">
                   Join our community with your login credentials
                 </h2>
-                <p className="text-lg text-gray-500 dark:text-blue-400">
-                  Lorem ipsum dor amet set amirospis{' '}
-                </p>
+               
               </div>
             </div>
           </div>

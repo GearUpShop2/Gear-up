@@ -566,6 +566,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
             </div>
 
             {isLoggedIn ? (
+            
               <Link
                 to="/profile"
                 // className="ml-4 md:ml-6 inline-flex items-center justify-center rounded-xl bg-blue-700 py-3 px-2 font-dm text-base font-medium text-white shadow-xl transition-transform duration-200 ease-in-out hover:scale-[1.02]"
@@ -573,9 +574,10 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
                 <img
                   src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                   alt="Profile"
-                  className="w-8 h-8 rounded-full ml-10"
+                  className="w-8 h-8 rounded-full ml-10  hidden sm:block"
                 />
               </Link>
+
             ) : (
               <>
                 <div className="flex flex-col mr-30 ml-10">
