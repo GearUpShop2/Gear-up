@@ -27,6 +27,7 @@ function Seafety() {
         <h1 className="font-bold text-4xl mb-4">seafty product</h1>
        
       </div>
+      
 
       <section
         id="Projects"

@@ -131,7 +131,7 @@ function ShopAll() {
             className="w-72 h-fit bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
           >
             <Link to={`/products/${product["_id"]}`}>
-              <img
+             <img
                 src={product.image[0].imageUrl}
                 alt={product.name}
                 className="h-80 w-72 object-cover rounded-t-xl"

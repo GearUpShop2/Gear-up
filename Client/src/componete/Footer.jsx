@@ -1,7 +1,6 @@
 import React from 'react'
 
 function Footer() {
-
   const isHomePage =
     window.location.pathname === "/dashboard" || window.location.pathname === "/dashboard/usertable"
     || window.location.pathname === "/dashboard/adminProfile"
